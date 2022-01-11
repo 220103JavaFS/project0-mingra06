@@ -5,6 +5,8 @@
 
 package com.revature;
 
+import com.revature.models.PersonType;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
