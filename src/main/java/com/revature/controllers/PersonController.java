@@ -9,7 +9,7 @@ import io.javalin.http.Handler;
 
 import java.util.List;
 
-public class PersonController extends Controller{
+public class PersonController implements Controller{
 
     private PersonService personService = new PersonService();
 

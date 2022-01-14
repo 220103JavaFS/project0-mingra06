@@ -3,7 +3,7 @@
 //The actual size is currently 5 times the number of entries.
 
 
-package com.revature;
+package com.revature.utils;
 
 import com.revature.models.PersonType;
 

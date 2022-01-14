@@ -16,4 +16,10 @@ public class Customer extends PersonType {
         super(name, email, id, AccessLevel.CUSTOMER);
         this.bankAccounts = bankAccounts;
     }
+
+    public boolean addAccount(BankAccount newAccount)
+    {
+        bankAccounts.add(newAccount);
+        return true;
+    }
 }

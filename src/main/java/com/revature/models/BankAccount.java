@@ -6,41 +6,87 @@ public class BankAccount {
 
     int accountNumber;
     double accountBalance;
-    ArrayList<PersonType> accountOwners;
 
 
     public BankAccount() {
-        this.accountOwners = new ArrayList<PersonType>();
     }
 
 
     public BankAccount(int accountNumber, double accountBalance, ArrayList<PersonType> accountOwners) {
         this.accountNumber = accountNumber;
-        this.accountBalance = accountBalance;
-        this.accountOwners = accountOwners;
+        this.deposit(accountBalance);
     }
 
     public int getAccountNumber() {
         return accountNumber;
     }
 
-    public void setAccountNumber(int accountNumber) {
-        this.accountNumber = accountNumber;
-    }
-
     public double getAccountBalance() {
         return accountBalance;
     }
 
-    public void setAccountBalance(double accountBalance) {
+    public boolean setBalance(int accountBalance)
+    {
         this.accountBalance = accountBalance;
+        return true;
     }
 
-    public ArrayList<PersonType> getAccountOwners() {
-        return accountOwners;
+
+    public boolean deposit(double money)
+    {
+        if(money > 0)
+        {
+            accountBalance+= money;
+            return true;
+        }
+
+        else
+        {
+            System.out.println("Error. Negative Deposit attempted.");
+            return false;
+        }
+
     }
 
-    public void setAccountOwners(ArrayList<PersonType> accountOwners) {
-        this.accountOwners = accountOwners;
+    public boolean withdraw(double money)
+    {
+        if(money > 0)
+        {
+            if(money < accountBalance)
+            {
+                accountBalance-= money;
+                return true;
+            }
+
+            else
+            {
+                System.out.println("Error. Withdraw amount is greater then account balance.");
+                return false;
+            }
+
+        }
+        else
+        {
+            System.out.println("Error. Negative Deposit attempted.");
+            return false;
+        }
+    }
+    public boolean addOwner(Customer newOwner)
+    {
+        newOwner.addAccount(this);
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "BankAccount{" +
+                "accountNumber=" + accountNumber +
+                ", accountBalance=" + accountBalance +
+                '}';
+    }
+
+    //This should never change so may need to be set to private, or just removed.
+    public void setAccountNumber(int accountNumber) {
+        this.accountNumber = accountNumber;
     }
 }
