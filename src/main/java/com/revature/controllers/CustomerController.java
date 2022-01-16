@@ -1,16 +1,16 @@
 package com.revature.controllers;
 
 import com.revature.services.BankAccountService;
+import com.revature.services.CustomerService;
 import io.javalin.Javalin;
 import io.javalin.http.Handler;
 
+public class CustomerController implements Controller{
 
-public class BankAccountController implements Controller{
-
-    private BankAccountService bankAccountService = new BankAccountService();
-    Handler getBankAccounts = (ctx) ->{
+    private CustomerService customerService = new CustomerService();
+    Handler getCustomers = (ctx) ->{
         if(ctx.req.getSession(false) != null) {
-            ctx.json(bankAccountService.findAllAccounts());
+            ctx.json(customerService.findAllAccounts());
             ctx.status(200);
         }else {
             ctx.status(401);
@@ -19,6 +19,6 @@ public class BankAccountController implements Controller{
 
     @Override
     public void addRoutes(Javalin app) {
-        app.get("/bankAccounts", getBankAccounts);
+        app.get("/customers", getCustomers);
     }
 }

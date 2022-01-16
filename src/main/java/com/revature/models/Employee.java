@@ -8,8 +8,16 @@ public class Employee extends PersonType{
     public Employee() {
     }
 
-    public Employee(String name, String email, int id,  int employeeNumber, AccessLevel accessLevel) {
-        super(name, email, id, accessLevel);
+    public Employee(String firstName, String lastName, String email, int id,  int employeeNumber, AccessLevel accessLevel) {
+        super(firstName, lastName, email, id, accessLevel);
+        this.employeeNumber = employeeNumber;
+    }
+
+    public int getEmployeeNumber() {
+        return employeeNumber;
+    }
+
+    public void setEmployeeNumber(int employeeNumber) {
         this.employeeNumber = employeeNumber;
     }
 }

@@ -17,13 +17,13 @@ public class ConnectionUtil {
         }
         //jdbc:postgresql://endpoint:port/databasename
         String url = "jdbc:postgresql://javafs220103.cgbxbw6vcclz.us-east-1.rds.amazonaws.com:5432/demos";
-        String username = "postgres";
-        String password = "password";
+        String username = System.getenv("SQLUsername");
+        String password = System.getenv("SQLPassword");
 
         return DriverManager.getConnection(url, username, password);
     }
 
-//
+
 //    public static void main(String[] args){
 //        try{
 //            getConnection();

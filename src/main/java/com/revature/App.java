@@ -2,6 +2,7 @@ package com.revature;
 
 import com.revature.controllers.BankAccountController;
 import com.revature.controllers.Controller;
+import com.revature.controllers.LoginController;
 import com.revature.controllers.PersonController;
 import io.javalin.Javalin;
 
@@ -16,7 +17,7 @@ public class App {
 
 
 
-        configure(new BankAccountController());
+        configure(new BankAccountController(), new LoginController());
 
         app.start();
 

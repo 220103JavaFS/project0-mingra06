@@ -5,7 +5,8 @@ package com.revature.models;
 
 public class PersonType {
 
-    String name;
+    String firstName;
+    String lastName;
     String email;
     int id;
     AccessLevel accessLevel;
@@ -13,15 +14,18 @@ public class PersonType {
     public PersonType() {
     }
 
-    public PersonType(String name, String email, int id, AccessLevel accessLevel) {
-        this.name = name;
+    public PersonType(String firstName, String lastName, String email, int id, AccessLevel accessLevel) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
         this.id = id;
         this.accessLevel = accessLevel;
     }
 
-    public String getName() { return this.name; }
-    public void setName(String newName) { this.name = newName; }
+    public String getFirstName() { return this.firstName; }
+    public String getLastName() { return this.lastName; }
+    public void setFirstName(String firstName) { this.firstName = firstName; }
+    public void setLastName(String lastName) { this.lastName = lastName; }
 
     public String getEmail() { return this.email; }
     public void setEmail(String newEmail) { this.email = newEmail; }
