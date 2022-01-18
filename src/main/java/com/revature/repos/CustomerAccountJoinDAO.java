@@ -7,9 +7,8 @@ import java.util.List;
 
 public interface CustomerAccountJoinDAO {
 
-    public List<BankAccount> findAllByCustomer(Integer id);
-    public List<Customer>findAllByAccount(Integer accountNumber);
-    public Customer findByID(int id);
+    public List<BankAccount> findAllByCustomer(int id);
+    public List<Customer>findAllByAccount(int accountNumber);
     public boolean updateLink(int id, int accountNumber);
-    public boolean addLink(Customer customer);
+    public boolean addLink(int id, int accountNumber);
 }

@@ -5,6 +5,9 @@ import com.revature.services.LoginService;
 import io.javalin.Javalin;
 import io.javalin.http.Handler;
 
+import static com.revature.models.EncryptionSHA.getSHA;
+import static com.revature.models.EncryptionSHA.toHexString;
+
 public class LoginController implements Controller{
 
     LoginService loginService = new LoginService();
@@ -12,7 +15,7 @@ public class LoginController implements Controller{
     private Handler loginAttempt = (ctx) -> {
         UserDTO userDTO = ctx.bodyAsClass(UserDTO.class);
 
-        if(loginService.login(userDTO.username, userDTO.password))
+        if(loginService.checkLogin(userDTO.username, toHexString(getSHA(userDTO.password))))
         {
             ctx.req.getSession();
             ctx.status(200);

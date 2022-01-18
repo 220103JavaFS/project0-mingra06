@@ -1,17 +1,14 @@
 package com.revature.services;
 
+import com.revature.dao.LoginDAOImpl;
+import com.revature.repos.LoginDAO;
+
 public class LoginService {
 
-    public boolean login(String username, String password){
-        System.out.println("=================");
-        System.out.println("password" + password);
-        if(username.equals("agent") & password.equals("password"))
-        {
-            System.out.println("++++++++++++++++");
-            System.out.println(username + password);
-            return true;
-        }else {
-            return false;
-        }
+    private LoginDAO loginDAO = new LoginDAOImpl();
+
+    public boolean checkLogin(String username, String password)
+    {
+        return loginDAO.checkLogin(username, password);
     }
 }

@@ -1,7 +1,9 @@
 package com.revature.dao;
 
 import com.revature.models.BankAccount;
+import com.revature.models.CustomerAccountJoin;
 import com.revature.repos.BankAccountDAO;
+import com.revature.repos.CustomerAccountJoinDAO;
 import com.revature.utils.ConnectionUtil;
 
 import java.sql.Connection;

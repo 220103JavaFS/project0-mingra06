@@ -1,12 +1,16 @@
 package com.revature.models;
 
-public class CustomerBankJoin {
+public class CustomerAccountJoin {
 
 
     int customerID;
     int accountNumber;
 
-    public CustomerBankJoin(int customerID, int accountNumber) {
+    public CustomerAccountJoin() {
+
+    }
+
+    public CustomerAccountJoin(int customerID, int accountNumber) {
         this.customerID = customerID;
         this.accountNumber = accountNumber;
     }
