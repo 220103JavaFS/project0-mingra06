@@ -15,9 +15,10 @@ public class LoginController implements Controller{
     private Handler loginAttempt = (ctx) -> {
         UserDTO userDTO = ctx.bodyAsClass(UserDTO.class);
 
-        if(loginService.checkLogin(userDTO.username, toHexString(getSHA(userDTO.password))))
+        userDTO = loginService.checkLogin(userDTO.username, toHexString(getSHA(userDTO.password)));
+        if(userDTO != null)
         {
-            ctx.req.getSession();
+            ctx.req.getSession().setAttribute("accessLevel", userDTO.access);
             ctx.status(200);
         }else
         {

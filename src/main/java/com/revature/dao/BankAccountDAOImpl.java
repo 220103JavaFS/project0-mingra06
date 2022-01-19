@@ -1,5 +1,6 @@
 package com.revature.dao;
 
+import com.revature.dto.TransferDTO;
 import com.revature.models.BankAccount;
 import com.revature.models.CustomerAccountJoin;
 import com.revature.repos.BankAccountDAO;
@@ -95,6 +96,25 @@ public class BankAccountDAOImpl implements BankAccountDAO {
 
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setDouble(1, balance);
+            statement.execute();
+            return true;
+
+        }catch(SQLException e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean transfer(TransferDTO transferDTO) {
+        try(Connection conn = ConnectionUtil.getConnection()) {
+            String sql = "CALL transfer(?,?,?);";
+
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setInt(1, transferDTO.senderAccount);
+            statement.setInt(2, transferDTO.receiverAccount);
+            statement.setDouble(3, transferDTO.amount);
             statement.execute();
             return true;
 

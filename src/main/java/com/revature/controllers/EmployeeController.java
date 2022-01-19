@@ -1,5 +1,6 @@
 package com.revature.controllers;
 
+import com.revature.models.Role;
 import com.revature.models.Employee;
 import com.revature.dto.EmployeeDTO;
 import com.revature.services.EmployeeService;
@@ -33,6 +34,9 @@ public class EmployeeController implements Controller{
     };
 
     Handler updateEmployee = (ctx) ->{
+
+
+
         Employee employee = new Employee();
 
         employee = ctx.bodyAsClass(Employee.class);
@@ -60,10 +64,10 @@ public class EmployeeController implements Controller{
 
     @Override
     public void addRoutes(Javalin app) {
-        app.get("/employees", getEmployees);
-        app.get("/employee", getEmployee);
-        app.get("/update_employee", updateEmployee);
-        app.get("/add_employee", addEmployee);
+        app.get("/employees", getEmployees, Role.EMPLOYEE);
+        app.post("/employee", getEmployee, Role.EMPLOYEE);
+        app.post("/update_employee", updateEmployee, Role.MANAGER);
+        app.post("/add_employee", addEmployee, Role.MANAGER);
     }
 
 

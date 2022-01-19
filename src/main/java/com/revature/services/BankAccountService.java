@@ -1,6 +1,7 @@
 package com.revature.services;
 
 import com.revature.dao.BankAccountDAOImpl;
+import com.revature.dto.TransferDTO;
 import com.revature.models.BankAccount;
 import com.revature.repos.BankAccountDAO;
 
@@ -31,6 +32,7 @@ public class BankAccountService {
     }
 
 
-
-
+    public boolean transfer(TransferDTO transferDTO) {
+        return bankAccountDAO.transfer(transferDTO);
+    }
 }

@@ -1,5 +1,6 @@
 package com.revature.controllers;
 
+import com.revature.models.Role;
 import com.revature.models.Customer;
 import com.revature.dto.CustomerDTO;
 import com.revature.services.CustomerService;
@@ -59,9 +60,9 @@ public class CustomerController implements Controller{
     };
     @Override
     public void addRoutes(Javalin app) {
-        app.get("/customers", getCustomers);
-        app.post("/customer", getCustomer);
-        app.post("/update_customer", updateCustomer);
+        app.get("/customers", getCustomers, Role.EMPLOYEE);
+        app.post("/customer", getCustomer, Role.EMPLOYEE);
+        app.post("/update_customer", updateCustomer, Role.EMPLOYEE);
         app.post("/add_customer", addCustomer);
     }
 }

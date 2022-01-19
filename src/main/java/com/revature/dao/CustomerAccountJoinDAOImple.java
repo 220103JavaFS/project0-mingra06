@@ -6,10 +6,7 @@ import com.revature.models.CustomerAccountJoin;
 import com.revature.repos.CustomerAccountJoinDAO;
 import com.revature.utils.ConnectionUtil;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -108,13 +105,16 @@ public class CustomerAccountJoinDAOImple implements CustomerAccountJoinDAO {
 
 
     @Override
-    public boolean updateLink(CustomerAccountJoin customerAccountJoin) {
+    public boolean deleteLink(CustomerAccountJoin customerAccountJoin) {
         try(Connection conn = ConnectionUtil.getConnection()) {
-            String sql = "INSERT INTO customer_bank_account_join(customer, account_number) VALUES(" + customerAccountJoin.getCustomerID() + ", " + customerAccountJoin.getAccountNumber() + ");";
+            String sql = "DELETE FROM customer_bank_account_join WHERE customer = ? AND account_number = ?;";
 
-            Statement statement = conn.createStatement();
+            PreparedStatement statement = conn.prepareStatement(sql);
 
-            statement.executeUpdate(sql);
+            statement.setInt(1, customerAccountJoin.getCustomerID());
+            statement.setInt(2, customerAccountJoin.getAccountNumber());
+
+            statement.execute();
             return true;
 
         }catch(SQLException e)
@@ -127,11 +127,14 @@ public class CustomerAccountJoinDAOImple implements CustomerAccountJoinDAO {
     @Override
     public boolean addLink(CustomerAccountJoin customerAccountJoin) {
         try(Connection conn = ConnectionUtil.getConnection()) {
-            String sql = "INSERT INTO customer_bank_account_join(customer, account_number) VALUES(" + customerAccountJoin.getCustomerID() + ", " + customerAccountJoin.getAccountNumber() + ");";
+            String sql = "INSERT INTO customer_bank_account_join(customer, account_number) VALUES(?,?);";
 
-            Statement statement = conn.createStatement();
+            PreparedStatement statement = conn.prepareStatement(sql);
 
-            statement.executeUpdate(sql);
+            statement.setInt(1, customerAccountJoin.getCustomerID());
+            statement.setInt(2, customerAccountJoin.getAccountNumber());
+
+            statement.execute();
             return true;
 
         }catch(SQLException e)

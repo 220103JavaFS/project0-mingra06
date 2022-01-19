@@ -1,5 +1,6 @@
 package com.revature.repos;
 
+import com.revature.dto.TransferDTO;
 import com.revature.models.BankAccount;
 import com.revature.models.Customer;
 
@@ -11,6 +12,5 @@ public interface BankAccountDAO {
     public BankAccount findByID(int id);
     public boolean updateBankAccount(BankAccount bankAccount);
     public boolean addBankAccount(double balance);
-
-
+    public  boolean transfer(TransferDTO transferDTO);
 }

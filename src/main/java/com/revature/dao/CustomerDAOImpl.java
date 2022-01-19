@@ -5,10 +5,7 @@ import com.revature.models.Customer;
 import com.revature.repos.CustomerDAO;
 import com.revature.utils.ConnectionUtil;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,11 +73,15 @@ public class CustomerDAOImpl implements CustomerDAO {
     @Override
     public boolean updateCustomer(Customer customer) {
         try(Connection conn = ConnectionUtil.getConnection()) {
-            String sql = "INSERT INTO customer(customer_first_name, customer_last_name, customer_email) VALUES(" + customer.getFirstName() + ", " + customer.getLastName() + ", " + customer.getEmail() + ");";
+            String sql = "UPDATE customer SET customer_first_name = ?, customer_last_name = ?, customer_email = ? WHERE customer_id = ?;";
 
-            Statement statement = conn.createStatement();
+            PreparedStatement statement = conn.prepareStatement(sql);
 
-            statement.executeUpdate(sql);
+            statement.setString(1, customer.getFirstName());
+            statement.setString(2, customer.getLastName());
+            statement.setString(3, customer.getEmail());
+            statement.setInt(4, customer.getId());
+            statement.execute();
             return true;
 
         }catch(SQLException e)
@@ -93,11 +94,17 @@ public class CustomerDAOImpl implements CustomerDAO {
     @Override
     public boolean addCustomer(Customer customer) {
         try(Connection conn = ConnectionUtil.getConnection()) {
-            String sql = "INSERT INTO customer(customer_first_name, customer_last_name, customer_email) VALUES(" + customer.getFirstName() + ", " + customer.getLastName() + ", " + customer.getEmail() + ");";
+            String sql = "INSERT INTO customer(customer_first_name, customer_last_name, customer_email) VALUES(?,?,?);";
 
-            Statement statement = conn.createStatement();
+            PreparedStatement statement = conn.prepareStatement(sql);
 
-            statement.executeUpdate(sql);
+            statement.setString(1, customer.getFirstName());
+            statement.setString(2, customer.getLastName());
+            statement.setString(3, customer.getEmail());
+            statement.execute();
+
+            statement.executeUpdate();
+
             return true;
 
         }catch(SQLException e)

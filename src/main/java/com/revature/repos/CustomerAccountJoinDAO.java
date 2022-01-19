@@ -10,6 +10,6 @@ public interface CustomerAccountJoinDAO {
 
     public List<BankAccount> findAllByCustomer(int id);
     public List<Customer>findAllByAccount(int accountNumber);
-    public boolean updateLink(CustomerAccountJoin customerAccountJoin);
+    public boolean deleteLink(CustomerAccountJoin customerAccountJoin);
     public boolean addLink(CustomerAccountJoin customerAccountJoin);
 }

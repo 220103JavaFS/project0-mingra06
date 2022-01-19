@@ -1,6 +1,8 @@
 package com.revature.controllers;
 
 import com.revature.dto.BankAccountDTO;
+import com.revature.dto.TransferDTO;
+import com.revature.models.Role;
 import com.revature.models.BankAccount;
 import com.revature.services.BankAccountService;
 import io.javalin.Javalin;
@@ -109,14 +111,27 @@ public class BankAccountController implements Controller{
         }
     };
 
+    Handler transferBankAccount = (ctx) ->{
+        TransferDTO transferDTO = new TransferDTO();
+
+        transferDTO = ctx.bodyAsClass(TransferDTO.class);
+
+        if(bankAccountService.transfer(transferDTO)) {
+            ctx.status(200);
+        }else {
+            ctx.status(401);
+        }
+    };
+
     @Override
     public void addRoutes(Javalin app) {
-        app.get("/bank_accounts", getBankAccounts);
-        app.post("/bank_account", getBankAccountByID);
-        app.post("/update_bank_account", updateBankAccount);
-        app.post("/add_bank_account", addBankAccount);
-        app.post("/deposit", depositBankAccount);
-        app.post("/withdraw", withdrawBankAccount);
+        app.get("/bank_accounts", getBankAccounts, Role.EMPLOYEE);
+        app.post("/bank_account", getBankAccountByID, Role.EMPLOYEE);
+        app.post("/update_bank_account", updateBankAccount, Role.EMPLOYEE);
+        app.post("/add_bank_account", addBankAccount, Role.EMPLOYEE);
+        app.post("/deposit", depositBankAccount, Role.EMPLOYEE);
+        app.post("/withdraw", withdrawBankAccount, Role.EMPLOYEE);
+        app.post("transfer", transferBankAccount, Role.EMPLOYEE);
     }
 }
 

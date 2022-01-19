@@ -12,7 +12,7 @@ public class Customer extends PersonType {
     }
 
     public Customer(String firstName, String lastName, String email, int id,  ArrayList<BankAccount> bankAccounts) {
-        super(firstName, lastName, email, id, AccessLevel.CUSTOMER);
+        super(firstName, lastName, email, id, Role.CUSTOMER);
         this.bankAccounts = bankAccounts;
     }
 

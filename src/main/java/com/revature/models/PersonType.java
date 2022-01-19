@@ -9,12 +9,12 @@ public class PersonType {
     String lastName;
     String email;
     int id;
-    AccessLevel accessLevel;
+    Role accessLevel;
 
     public PersonType() {
     }
 
-    public PersonType(String firstName, String lastName, String email, int id, AccessLevel accessLevel) {
+    public PersonType(String firstName, String lastName, String email, int id, Role accessLevel) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -33,10 +33,10 @@ public class PersonType {
     public int getId() { return this.id; }
     public void setId(int newId) { this.id = newId; }
 
-    public AccessLevel getAccessLevel() {
+    public Role getAccessLevel() {
         return accessLevel;
     }
-    public void setAccessLevel(AccessLevel accessLevel) {
+    public void setAccessLevel(Role accessLevel) {
         this.accessLevel = accessLevel;
     }
 }

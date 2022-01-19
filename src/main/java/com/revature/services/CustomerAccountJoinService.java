@@ -22,7 +22,7 @@ public class CustomerAccountJoinService {
     }
 
     public boolean updateLink(CustomerAccountJoin customerAccountJoin) {
-        return customerAccountJoinDAO.updateLink(customerAccountJoin);
+        return customerAccountJoinDAO.deleteLink(customerAccountJoin);
     }
 
     public boolean addLink(CustomerAccountJoin customerAccountJoin) {

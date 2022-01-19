@@ -43,7 +43,7 @@ public class CustomerAccountController implements Controller{
         }
     };
 
-    Handler updateLink = (ctx) ->{
+    Handler deleteLink = (ctx) ->{
         CustomerAccountJoin accountJoin = new CustomerAccountJoin();
 
         accountJoin = ctx.bodyAsClass(CustomerAccountJoin.class);
@@ -57,6 +57,9 @@ public class CustomerAccountController implements Controller{
     };
 
     Handler addLink = (ctx) ->{
+
+        System.out.println("Entering");
+
         CustomerAccountJoin accountJoin = new CustomerAccountJoin();
 
         accountJoin = ctx.bodyAsClass(CustomerAccountJoin.class);
@@ -74,10 +77,10 @@ public class CustomerAccountController implements Controller{
 
     @Override
     public void addRoutes(Javalin app) {
-        app.get("/by_customer", getAllByCustomer);
-        app.get("/by_account", getAllByAccount);
-        app.get("/update_link", updateLink);
-        app.get("/add_link", addLink);
+        app.post("/by_customer", getAllByCustomer);
+        app.post("/by_account", getAllByAccount);
+        app.post("/update_link", deleteLink);
+        app.post("/add_link", addLink);
     }
 }
 

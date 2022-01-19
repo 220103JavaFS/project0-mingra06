@@ -1,8 +1,10 @@
 package com.revature.dao;
 
+import com.revature.dto.UserDTO;
 import com.revature.models.BankAccount;
 import com.revature.repos.LoginDAO;
 import com.revature.utils.ConnectionUtil;
+import org.eclipse.jetty.server.Authentication;
 import org.postgresql.util.PSQLException;
 
 import java.sql.Connection;
@@ -16,12 +18,12 @@ public class LoginDAOImpl implements LoginDAO {
 
 
     @Override
-    public boolean checkLogin(String username, String password){
+    public UserDTO checkLogin(String username, String password){
         try(Connection conn = ConnectionUtil.getConnection()) {
             if(!validateInput(username))
             {
                 System.out.println("Error in input, potential SQL injection detected.");
-                return false;
+                return new UserDTO();
             }
             String sql = "SELECT * FROM logins WHERE username = " + username + ";";
 
@@ -35,11 +37,15 @@ public class LoginDAOImpl implements LoginDAO {
             {
                 if(result.getString("en_password").equals(password))
                 {
-                    return true;
+                    UserDTO userDTO = new UserDTO();
+                    userDTO.access = result.getInt("access_level");
+                    return userDTO;
                 }
                 else
                 {
-                    return false;
+                    UserDTO userDTO = new UserDTO();
+                    userDTO.access = 1;
+                    return userDTO;
                 }
             }
         }catch(PSQLException e)
@@ -48,7 +54,7 @@ public class LoginDAOImpl implements LoginDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return false;
+        return new UserDTO();
     }
 
     private boolean validateInput(String input)

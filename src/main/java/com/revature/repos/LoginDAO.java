@@ -1,6 +1,8 @@
 package com.revature.repos;
 
+import com.revature.dto.UserDTO;
+
 public interface LoginDAO {
 
-    public boolean checkLogin(String username, String password);
+    public UserDTO checkLogin(String username, String password);
 }
