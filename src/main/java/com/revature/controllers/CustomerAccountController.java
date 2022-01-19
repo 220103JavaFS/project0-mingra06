@@ -24,8 +24,10 @@ public class CustomerAccountController implements Controller{
 
         if(ctx.req.getSession(false) != null) {
             ctx.json(customerAccountJoinService.findAllByCustomer(Integer.parseInt(customerDTO.customerID)));
+            log.info("All accounts owned by customer retrieved.");
             ctx.status(200);
         }else {
+            log.warn("Invalid session.");
             ctx.status(401);
         }
     };
@@ -37,8 +39,10 @@ public class CustomerAccountController implements Controller{
 
         if(ctx.req.getSession(false) != null) {
             ctx.json(customerAccountJoinService.findAllByAccount(Integer.parseInt(bankAccountDTO.accountNumber)));
+            log.info("All customers that own account retrieved.");
             ctx.status(200);
         }else {
+            log.warn("Invalid session.");
             ctx.status(401);
         }
     };
@@ -50,8 +54,10 @@ public class CustomerAccountController implements Controller{
 
         if(ctx.req.getSession(false) != null) {
             ctx.json(customerAccountJoinService.updateLink(accountJoin));
+            log.info("Link deleted.");
             ctx.status(200);
         }else {
+            log.warn("Invalid session.");
             ctx.status(401);
         }
     };
@@ -66,8 +72,10 @@ public class CustomerAccountController implements Controller{
 
         if(ctx.req.getSession(false) != null) {
             ctx.json(customerAccountJoinService.addLink(accountJoin));
+            log.info("Link added.");
             ctx.status(200);
         }else {
+            log.warn("Invalid session.");
             ctx.status(401);
         }
     };

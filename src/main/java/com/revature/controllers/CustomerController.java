@@ -14,8 +14,10 @@ public class CustomerController implements Controller{
     Handler getCustomers = (ctx) ->{
         if(ctx.req.getSession(false) != null) {
             ctx.json(customerService.findAllAccounts());
+            log.info("All customers retrieved.");
             ctx.status(200);
         }else {
+            log.warn("Invalid session.");
             ctx.status(401);
         }
     };
@@ -27,8 +29,10 @@ public class CustomerController implements Controller{
 
         if(ctx.req.getSession(false) != null) {
             ctx.json(customerService.findByID(Integer.parseInt(customerDTO.customerID)));
+            log.info("Customer retrieved by ID.");
             ctx.status(200);
         }else {
+            log.warn("Invalid session.");
             ctx.status(401);
         }
     };
@@ -40,8 +44,10 @@ public class CustomerController implements Controller{
 
         if(ctx.req.getSession(false) != null) {
             ctx.json(customerService.updateCustomer(customer));
+            log.info("Customer updated.");
             ctx.status(200);
         }else {
+            log.warn("Invalid session.");
             ctx.status(401);
         }
     };
@@ -53,8 +59,10 @@ public class CustomerController implements Controller{
 
         if(ctx.req.getSession(false) != null) {
             ctx.json(customerService.addCustomer(customer));
+            log.info("Customer added.");
             ctx.status(200);
         }else {
+            log.warn("Invalid session.");
             ctx.status(401);
         }
     };

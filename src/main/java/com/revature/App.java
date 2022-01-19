@@ -3,6 +3,8 @@ package com.revature;
 import com.revature.controllers.*;
 import com.revature.models.AccessManager;
 import io.javalin.Javalin;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class App {
 
@@ -15,7 +17,6 @@ public class App {
         configure(new BankAccountController(), new LoginController(), new EmployeeController(), new CustomerAccountController(), new CustomerController());
 
         app.start();
-
     }
 
     public static void configure(Controller... controllers){

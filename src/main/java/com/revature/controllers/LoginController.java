@@ -19,15 +19,18 @@ public class LoginController implements Controller{
         if(userDTO != null)
         {
             ctx.req.getSession().setAttribute("accessLevel", userDTO.access);
+            log.info("Login successful");
             ctx.status(200);
         }else
         {
             ctx.req.getSession().invalidate();
+            log.warn("Login failed.");
             ctx.status(401);
         }
     };
     private Handler logoutAttempt = (ctx) -> {
             ctx.req.getSession().invalidate();
+            log.info("Session logged out.");
             ctx.status(200);
     };
     @Override

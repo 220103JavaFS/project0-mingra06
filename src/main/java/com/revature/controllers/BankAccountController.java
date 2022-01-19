@@ -16,8 +16,10 @@ public class BankAccountController implements Controller{
     Handler getBankAccounts = (ctx) ->{
         if(ctx.req.getSession(false) != null) {
             ctx.json(bankAccountService.findAllAccounts());
+            log.info("All bank accounts retrieved.");
             ctx.status(200);
         }else {
+            log.warn("Session invalid");
             ctx.status(401);
         }
     };
@@ -31,8 +33,10 @@ public class BankAccountController implements Controller{
 
         if(ctx.req.getSession(false) != null) {
             ctx.json(bankAccountService.findByID(Integer.parseInt(bankAccountDTO.accountNumber)));
+            log.info("Bank account retrieved.");
             ctx.status(200);
         }else {
+            log.warn("Session invalid.");
             ctx.status(401);
         }
     };
@@ -44,8 +48,10 @@ public class BankAccountController implements Controller{
 
         if(ctx.req.getSession(false) != null) {
             ctx.json(bankAccountService.updateBankAccount(account));
+            log.info("Bank account updated.");
             ctx.status(200);
         }else {
+            log.warn("Session invalid");
             ctx.status(401);
         }
     };
@@ -57,8 +63,10 @@ public class BankAccountController implements Controller{
 
         if(ctx.req.getSession(false) != null) {
             ctx.json(bankAccountService.addBankAccount(account.getAccountBalance()));
+            log.info("Bank account added.");
             ctx.status(200);
         }else {
+            log.warn("Session invalid.");
             ctx.status(401);
         }
     };
@@ -74,14 +82,17 @@ public class BankAccountController implements Controller{
             {
                 account.setBalance(total - account.getAccountBalance());
                 ctx.json(bankAccountService.updateBankAccount(account));
+                log.info("Withdraw completed.");
                 ctx.status(200);
             }
             else
             {
+                log.warn("Withdraw failed.");
                 ctx.status(402);
             }
 
         }else {
+            log.warn("Session invalid.");
             ctx.status(401);
         }
     };
@@ -99,26 +110,32 @@ public class BankAccountController implements Controller{
             {
                 account.setBalance(total + account.getAccountBalance());
                 ctx.json(bankAccountService.updateBankAccount(account));
+                log.info("Deposit completed.");
                 ctx.status(200);
             }
             else
             {
+                log.warn("Deposit failed.");
                 ctx.status(400);
             }
 
         }else {
+            log.warn("Session invalid.");
             ctx.status(401);
         }
     };
 
     Handler transferBankAccount = (ctx) ->{
+
         TransferDTO transferDTO = new TransferDTO();
 
         transferDTO = ctx.bodyAsClass(TransferDTO.class);
 
         if(bankAccountService.transfer(transferDTO)) {
             ctx.status(200);
+            log.info("Successful transfer.");
         }else {
+            log.warn("Transfer failed.");
             ctx.status(401);
         }
     };
