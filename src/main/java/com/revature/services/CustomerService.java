@@ -14,6 +14,8 @@ public class CustomerService {
     {
         return customerDAO.findAll();
     }
-
+    public Customer findByID(int id){return customerDAO.findByID(id);}
+    public boolean updateCustomer(Customer customer){return customerDAO.updateCustomer(customer);}
+    public boolean addCustomer(Customer customer){return customerDAO.addCustomer(customer);}
 
 }

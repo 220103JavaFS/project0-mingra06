@@ -6,10 +6,7 @@ import com.revature.repos.BankAccountDAO;
 import com.revature.repos.CustomerAccountJoinDAO;
 import com.revature.utils.ConnectionUtil;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,7 +56,7 @@ public class BankAccountDAOImpl implements BankAccountDAO {
             {
                 BankAccount bankAccount = new BankAccount();
                 bankAccount.setAccountNumber(result.getInt("account_number"));
-                bankAccount.setBalance(result.getInt("account_balance"));
+                bankAccount.setBalance(result.getDouble("account_balance"));
                 list.add(bankAccount);
             }
             return list.get(0);//Only one should be here
@@ -74,11 +71,14 @@ public class BankAccountDAOImpl implements BankAccountDAO {
     @Override
     public boolean updateBankAccount(BankAccount bankAccount) {
         try(Connection conn = ConnectionUtil.getConnection()) {
-            String sql = "INSERT INTO bank_account(account_number,account_balance) VALUES(" + bankAccount.getAccountNumber() + ", " + bankAccount.getAccountBalance() + ");";
+            String sql = "UPDATE bank_account SET account_balance = ? WHERE account_number = ?;";
 
-            Statement statement = conn.createStatement();
+            PreparedStatement statement = conn.prepareStatement(sql);
 
-            statement.executeUpdate(sql);
+            statement.setDouble(1, bankAccount.getAccountBalance());
+            statement.setInt(2, bankAccount.getAccountNumber());
+
+            statement.execute();
             return true;
 
         }catch(SQLException e)
@@ -89,13 +89,13 @@ public class BankAccountDAOImpl implements BankAccountDAO {
     }
 
     @Override
-    public boolean addBankAccount(BankAccount bankAccount) {
+    public boolean addBankAccount(double balance) {
         try(Connection conn = ConnectionUtil.getConnection()) {
-            String sql = "INSERT INTO bank_account(account_number,account_balance) VALUES(" + bankAccount.getAccountNumber() + ", " + bankAccount.getAccountBalance() + ");";
+            String sql = "INSERT INTO bank_account(account_balance) VALUES(?);";
 
-            Statement statement = conn.createStatement();
-
-            statement.executeUpdate(sql);
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setDouble(1, balance);
+            statement.execute();
             return true;
 
         }catch(SQLException e)

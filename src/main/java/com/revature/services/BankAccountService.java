@@ -17,5 +17,20 @@ public class BankAccountService {
 
 
 
+    public BankAccount findByID(int id)
+    {
+        return bankAccountDAO.findByID(id);
+    }
+    public boolean updateBankAccount(BankAccount bankAccount)
+    {
+     return bankAccountDAO.updateBankAccount(bankAccount);
+    }
+    public boolean addBankAccount(double balance)
+    {
+        return bankAccountDAO.addBankAccount(balance);
+    }
+
+
+
 
 }

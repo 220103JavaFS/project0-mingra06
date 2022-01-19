@@ -25,7 +25,7 @@ public class BankAccount {
         return accountBalance;
     }
 
-    public boolean setBalance(int accountBalance)
+    public boolean setBalance(double accountBalance)
     {
         this.accountBalance = accountBalance;
         return true;

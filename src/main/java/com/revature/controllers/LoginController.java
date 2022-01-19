@@ -1,6 +1,6 @@
 package com.revature.controllers;
 
-import com.revature.models.UserDTO;
+import com.revature.dto.UserDTO;
 import com.revature.services.LoginService;
 import io.javalin.Javalin;
 import io.javalin.http.Handler;
@@ -25,11 +25,13 @@ public class LoginController implements Controller{
             ctx.status(401);
         }
     };
-
-
-
+    private Handler logoutAttempt = (ctx) -> {
+            ctx.req.getSession().invalidate();
+            ctx.status(200);
+    };
     @Override
     public void addRoutes(Javalin app) {
         app.post("/login", this.loginAttempt);
+        app.get("/logout", this.logoutAttempt);
     }
 }

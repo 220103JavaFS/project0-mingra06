@@ -108,9 +108,9 @@ public class CustomerAccountJoinDAOImple implements CustomerAccountJoinDAO {
 
 
     @Override
-    public boolean updateLink(int id, int accountNumber) {
+    public boolean updateLink(CustomerAccountJoin customerAccountJoin) {
         try(Connection conn = ConnectionUtil.getConnection()) {
-            String sql = "INSERT INTO customer_bank_account_join(customer, account_number) VALUES(" + id + ", " + accountNumber + ");";
+            String sql = "INSERT INTO customer_bank_account_join(customer, account_number) VALUES(" + customerAccountJoin.getCustomerID() + ", " + customerAccountJoin.getAccountNumber() + ");";
 
             Statement statement = conn.createStatement();
 
@@ -125,9 +125,9 @@ public class CustomerAccountJoinDAOImple implements CustomerAccountJoinDAO {
     }
 
     @Override
-    public boolean addLink(int id, int accountNumber ) {
+    public boolean addLink(CustomerAccountJoin customerAccountJoin) {
         try(Connection conn = ConnectionUtil.getConnection()) {
-            String sql = "INSERT INTO customer_bank_account_join(customer, account_number) VALUES(" + id + ", " + accountNumber + ");";
+            String sql = "INSERT INTO customer_bank_account_join(customer, account_number) VALUES(" + customerAccountJoin.getCustomerID() + ", " + customerAccountJoin.getAccountNumber() + ");";
 
             Statement statement = conn.createStatement();
 

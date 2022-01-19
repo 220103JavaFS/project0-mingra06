@@ -18,7 +18,11 @@ public class LoginDAOImpl implements LoginDAO {
     @Override
     public boolean checkLogin(String username, String password){
         try(Connection conn = ConnectionUtil.getConnection()) {
-            validateInput(username)
+            if(!validateInput(username))
+            {
+                System.out.println("Error in input, potential SQL injection detected.");
+                return false;
+            }
             String sql = "SELECT * FROM logins WHERE username = " + username + ";";
 
             Statement statement = conn.createStatement();
@@ -38,7 +42,6 @@ public class LoginDAOImpl implements LoginDAO {
                     return false;
                 }
             }
-
         }catch(PSQLException e)
         {
             e.printStackTrace();
@@ -50,7 +53,14 @@ public class LoginDAOImpl implements LoginDAO {
 
     private boolean validateInput(String input)
     {
-        switch (input.toUpperCase())
-            case
+        if(input.toUpperCase().contains("INSERT") || input.toUpperCase().contains("DELETE") || input.toUpperCase().contains("ADD") || input.toUpperCase().contains("WHERE") || input.toUpperCase().contains("FROM")
+        || input.toUpperCase().contains("WHEN") || input.toUpperCase().contains("GROUP") || input.toUpperCase().contains("VALUES"))
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 }

@@ -21,12 +21,12 @@ public class CustomerAccountJoinService {
         return customerAccountJoinDAO.findAllByAccount(accountNumber);
     }
 
-    public boolean updateLink(int id, int accountNumber) {
-        return customerAccountJoinDAO.updateLink(id, accountNumber);
+    public boolean updateLink(CustomerAccountJoin customerAccountJoin) {
+        return customerAccountJoinDAO.updateLink(customerAccountJoin);
     }
 
-    public boolean addLink(int id, int accountNumber ) {
-        return customerAccountJoinDAO.addLink(id, accountNumber);
+    public boolean addLink(CustomerAccountJoin customerAccountJoin) {
+        return customerAccountJoinDAO.addLink(customerAccountJoin);
     }
 
 }

@@ -10,7 +10,7 @@ public interface BankAccountDAO {
     public List<BankAccount> findAll();
     public BankAccount findByID(int id);
     public boolean updateBankAccount(BankAccount bankAccount);
-    public boolean addBankAccount(BankAccount bankAccount);
+    public boolean addBankAccount(double balance);
 
 
 }

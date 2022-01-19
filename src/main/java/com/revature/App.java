@@ -1,9 +1,6 @@
 package com.revature;
 
-import com.revature.controllers.BankAccountController;
-import com.revature.controllers.Controller;
-import com.revature.controllers.LoginController;
-//import com.revature.controllers.PersonController;
+import com.revature.controllers.*;
 import io.javalin.Javalin;
 
 public class App {
@@ -15,9 +12,7 @@ public class App {
 
         app = Javalin.create(); //This represents the configuration of the framework at runtime.
 
-
-
-        configure(new BankAccountController(), new LoginController());
+        configure(new BankAccountController(), new LoginController(), new EmployeeController(), new CustomerAccountController(), new CustomerController());
 
         app.start();
 
@@ -28,6 +23,5 @@ public class App {
         for(Controller c: controllers){
             c.addRoutes(app);
         }
-
     }
 }

@@ -24,6 +24,9 @@ public class EncryptionSHA {
         }
         return hexString.toString();
     }
+
+
+
 //    public static void main(String args[])
 //    {
 //        try
