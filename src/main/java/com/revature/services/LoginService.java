@@ -12,4 +12,8 @@ public class LoginService {
     {
         return loginDAO.checkLogin(username, password);
     }
+
+    public boolean createAccount(UserDTO userDTO) {
+        return loginDAO.createAccount(userDTO);
+    }
 }

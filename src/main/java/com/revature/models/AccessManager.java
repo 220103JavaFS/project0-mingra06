@@ -19,6 +19,7 @@ public class AccessManager implements io.javalin.core.security.AccessManager {
         openList.add("/login");
         openList.add("/logout");
         openList.add("/add_customer");
+        openList.add("/create_account");
 
 
         if(ctx.req.getSession(false) == null && !openList.contains(ctx.path())){

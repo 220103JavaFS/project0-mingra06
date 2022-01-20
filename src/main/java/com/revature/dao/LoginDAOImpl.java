@@ -7,10 +7,7 @@ import com.revature.utils.ConnectionUtil;
 import org.eclipse.jetty.server.Authentication;
 import org.postgresql.util.PSQLException;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,6 +52,25 @@ public class LoginDAOImpl implements LoginDAO {
             e.printStackTrace();
         }
         return new UserDTO();
+    }
+
+    @Override
+    public boolean createAccount(UserDTO userDTO) {
+        try(Connection conn = ConnectionUtil.getConnection()) {
+
+            String sql = "INSERT INTO logins(username, password) VALUES(?,?,?);";
+
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setString(1, userDTO.username);
+            statement.setString(2, userDTO.password);
+            statement.setInt(3, 1);//Set default access to customer, only Manager can update
+
+            return true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     private boolean validateInput(String input)
